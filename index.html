@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EK STUDIO | 电商 AI 工作台作品集</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #FAF8F5;
+      --bg-peach: #FFF9F5;
+      --bg-pink: #FFF5F9;
+      --bg-lavender: #F5F1FA;
+      --bg-mint: #F0FAF6;
+      --surface: #FFFFFF;
+      --text-primary: #2D2D3A;
+      --text-secondary: #6B6B7B;
+      --text-tertiary: #8A8A99;
+      --accent-mauve: #D4849C;
+      --accent-lavender: #C59BD8;
+      --accent-peach: #F4A896;
+      --accent-violet: #A855F7;
+      --accent-pink: #EC4899;
+      --accent-coral: #FB923C;
+      --accent-cyan: #67E8F9;
+      --accent-mint: #6EE7B7;
+      --accent-gold: #FCD34D;
+      --border: rgba(0, 0, 0, 0.08);
+      --shadow: 0 8px 28px rgba(153, 128, 166, 0.10);
+      --shadow-hover: 0 12px 40px rgba(153, 128, 166, 0.16);
+      --radius-sm: 7px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --max-width: 1440px;
+      --transition: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Microsoft YaHei UI", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
+      color: var(--text-primary);
+      background: var(--bg-cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .kicker {
+      font-family: "Inter", sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent-mauve);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent-mauve), var(--accent-lavender), var(--accent-peach));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Layout */
+    .page-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 0 64px;
+    }
+
+    section {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      background: rgba(250, 248, 245, 0.82);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, height 0.3s var(--transition);
+    }
+
+    .header.scrolled {
+      border-bottom-color: var(--border);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+      height: 64px;
+    }
+
+    .header-inner {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 0 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      transition: transform 0.3s var(--transition);
+    }
+
+    .logo:hover {
+      transform: scale(1.02);
+    }
+
+    .logo-mark {
+      font-family: "Inter", sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .logo-text {
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav a {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent-mauve), var(--accent-lavender));
+      transition: width 0.3s var(--transition);
+    }
+
+    .nav a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav a:hover::after,
+    .nav a.active::after {
+      width: 100%;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.26s var(--transition), box-shadow 0.26s ease;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s var(--transition);
+    }
+
+    .btn:hover::before {
+      transform: translateX(100%);
+    }
+
+    .btn-primary {
+      background: linear-gradient(112deg, var(--accent-mauve), var(--accent-lavender), var(--accent-peach));
+      color: white;
+      box-shadow: 0 8px 24px rgba(196, 115, 150, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(196, 115, 150, 0.32);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(0, 0, 0, 0.16);
+      transform: translateY(-2px);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 900px;
+      background: var(--bg-cream);
+      padding-top: 200px;
+      padding-bottom: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .hero-shape-1 {
+      width: 400px;
+      height: 400px;
+      background: rgba(212, 132, 156, 0.18);
+      top: 10%;
+      left: -5%;
+      animation-delay: 0s;
+    }
+
+    .hero-shape-2 {
+      width: 320px;
+      height: 320px;
+      background: rgba(197, 155, 216, 0.16);
+      top: 30%;
+      right: -3%;
+      animation-delay: -7s;
+    }
+
+    .hero-shape-3 {
+      width: 280px;
+      height: 280px;
+      background: rgba(244, 168, 150, 0.14);
+      bottom: 20%;
+      left: 30%;
+      animation-delay: -14s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.98); }
+      75% { transform: translate(20px, 30px) scale(1.02); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 32px;
+    }
+
+    .hero-title {
+      font-size: 72px;
+      font-weight: 300;
+      color: var(--text-primary);
+    }
+
+    .hero-subtitle {
+      font-size: 56px;
+      font-weight: 300;
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 720px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .hero-actions .btn {
+      padding: 16px 28px;
+      font-size: 15px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 48px;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .hero-visual {
+      width: 100%;
+      max-width: 1100px;
+      height: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.4s var(--transition), box-shadow 0.4s ease;
+    }
+
+    .hero-visual img {
+      width: 66.67%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .hero-visual:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .hero-visual-ui {
+      width: 92%;
+      height: 88%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      display: flex;
+      overflow: hidden;
+      background: var(--bg-cream);
+    }
+
+    .hero-visual-sidebar {
+      width: 200px;
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-visual-sidebar-item {
+      height: 32px;
+      border-radius: 6px;
+      background: var(--bg-lavender);
+      transition: background 0.3s ease;
+    }
+
+    .hero-visual-sidebar-item:nth-child(2) {
+      background: linear-gradient(90deg, rgba(212, 132, 156, 0.2), rgba(197, 155, 216, 0.2));
+    }
+
+    .hero-visual-main {
+      flex: 1;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .hero-visual-chat {
+      flex: 1;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-visual-chat-bubble {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: bubbleIn 0.6s var(--transition) forwards;
+    }
+
+    .hero-visual-chat-bubble.user {
+      align-self: flex-end;
+      background: linear-gradient(112deg, var(--accent-mauve), var(--accent-lavender));
+      color: white;
+      animation-delay: 0.8s;
+    }
+
+    .hero-visual-chat-bubble.ai {
+      align-self: flex-start;
+      background: var(--bg-lavender);
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bubbleIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-visual-preview {
+      height: 140px;
+      background: var(--bg-lavender);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-tertiary);
+      font-size: 13px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual-preview::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: translateX(-100%);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      50%, 100% { transform: translateX(100%); }
+    }
+
+    /* Screenshot placeholder component */
+    .screenshot {
+      width: 100%;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--bg-lavender), var(--bg-pink));
+      border: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-tertiary);
+      font-size: 13px;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.4s var(--transition), box-shadow 0.4s ease;
+    }
+
+    .screenshot::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.4) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .screenshot:hover {
+      transform: scale(1.01);
+      box-shadow: 0 8px 24px rgba(153, 128, 166, 0.12);
+    }
+
+    .screenshot:hover::before {
+      opacity: 1;
+    }
+
+    .screenshot-label {
+      position: relative;
+      z-index: 1;
+      padding: 20px;
+    }
+
+    .screenshot-label strong {
+      display: block;
+      font-size: 15px;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .screenshot-label span {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    /* Sections */
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+
+    .section-title {
+      font-size: 48px;
+      color: var(--text-primary);
+    }
+
+    .section-desc {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 720px;
+    }
+
+    /* Context */
+    .context {
+      background: var(--bg-peach);
+      padding: 120px 0;
+    }
+
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      transition: transform 0.4s var(--transition), box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-mauve), var(--accent-lavender), var(--accent-peach));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-index {
+      font-family: "Inter", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    /* Role Section */
+    .role {
+      background: var(--bg-lavender);
+      padding: 120px 0;
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .role-card {
+      padding: 40px;
+    }
+
+    .role-card h3 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .role-card p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .role-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .tag:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(153, 128, 166, 0.1);
+    }
+
+    .role-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .role-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s var(--transition), box-shadow 0.3s ease;
+    }
+
+    .role-item:hover {
+      transform: translateX(8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .role-item-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Inter", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent-mauve), var(--accent-lavender));
+      color: white;
+    }
+
+    .role-item-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Architecture */
+    .architecture {
+      background: var(--surface);
+      padding: 120px 0;
+    }
+
+    .architecture-showcase {
+      margin-bottom: 64px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-cream);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .architecture-showcase .screenshot {
+      height: 420px;
+      border: none;
+      border-radius: 0;
+    }
+
+    .flow-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 32px 0;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .flow-step {
+      font-family: "Inter", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      transition: transform 0.3s var(--transition);
+    }
+
+    .flow-step:hover {
+      transform: translateY(-3px);
+    }
+
+    .flow-arrow {
+      font-size: 16px;
+      color: var(--text-tertiary);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: translateX(0); }
+      50% { opacity: 1; transform: translateX(4px); }
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .module-card {
+      min-height: 180px;
+    }
+
+    .module-card .card-title {
+      font-size: 20px;
+    }
+
+    .module-card .card-desc {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Table Sections */
+    .tech-stack,
+    .capabilities,
+    .value-compare {
+      padding: 120px 0;
+    }
+
+    .tech-stack {
+      background: var(--bg-pink);
+    }
+
+    .capabilities {
+      background: var(--bg-mint);
+    }
+
+    .value-compare {
+      background: var(--bg-peach);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 22px 28px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s ease;
+    }
+
+    .data-table tbody tr:hover td {
+      background: rgba(212, 132, 156, 0.03);
+    }
+
+    .data-table th {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .data-table td {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table td strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .value-compare .data-table th:first-child,
+    .value-compare .data-table td:first-child {
+      width: 25%;
+      color: var(--text-primary);
+      font-weight: 500;
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .value-compare .data-table td:nth-child(2) {
+      width: 37.5%;
+    }
+
+    .value-compare .data-table td:nth-child(3) {
+      width: 37.5%;
+      color: var(--text-primary);
+    }
+
+    .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .check-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-mauve);
+      flex-shrink: 0;
+    }
+
+    /* Features */
+    .features {
+      background: var(--bg-lavender);
+      padding: 120px 0;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .feature-card {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .feature-thumb {
+      width: 100%;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-lavender);
+    }
+
+    .feature-thumb img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      transition: transform 0.6s var(--transition);
+    }
+
+    .feature-card:hover .feature-thumb img {
+      transform: scale(1.02);
+    }
+
+    .feature-thumb.product {
+      background: linear-gradient(135deg, #D4849C, #C59BD8);
+    }
+
+    .feature-thumb.creative {
+      background: linear-gradient(135deg, #EC4899, #FB923C);
+    }
+
+    .feature-thumb.advisor {
+      background: linear-gradient(135deg, #A855F7, #67E8F9);
+    }
+
+    .feature-thumb.archive {
+      background: linear-gradient(135deg, #6EE7B7, #FCD34D);
+    }
+
+    .feature-info {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .feature-card .card-title {
+      font-size: 20px;
+    }
+
+    .feature-card .card-desc {
+      font-size: 14px;
+    }
+
+    /* Craft */
+    .craft {
+      background: var(--surface);
+      padding: 120px 0;
+    }
+
+    .craft-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .craft-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      transition: padding-left 0.3s var(--transition);
+    }
+
+    .craft-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .craft-item:hover {
+      padding-left: 12px;
+    }
+
+    .craft-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .craft-number {
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      width: 32px;
+      transition: transform 0.3s var(--transition);
+    }
+
+    .craft-item:hover .craft-number {
+      transform: scale(1.2);
+    }
+
+    .craft-name {
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--text-primary);
+    }
+
+    .craft-desc {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      width: 100%;
+      max-width: 520px;
+      flex-shrink: 0;
+    }
+
+    /* Demo Flow */
+    .demo-flow {
+      background: var(--bg-cream);
+      padding: 120px 0;
+    }
+
+    .demo-showcase {
+      margin-bottom: 64px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .demo-showcase video {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      min-height: 450px;
+      aspect-ratio: 16 / 10;
+      display: block;
+      object-fit: contain;
+      background: #000;
+    }
+
+    .demo-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .demo-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      position: relative;
+      transition: transform 0.4s var(--transition), box-shadow 0.4s ease;
+    }
+
+    .demo-step:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .demo-step-number {
+      font-family: "Inter", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      color: var(--accent-mauve);
+    }
+
+    .demo-step-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .demo-step-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    /* Retrospective */
+    .retrospective {
+      background: var(--bg-pink);
+      padding: 120px 0;
+    }
+
+    .retro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .retro-card {
+      padding: 40px;
+    }
+
+    .retro-card h3 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .retro-card p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .retro-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .retro-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      transition: transform 0.2s ease;
+    }
+
+    .retro-list-item:hover {
+      transform: translateX(6px);
+    }
+
+    .retro-list-item::before {
+      content: "—";
+      color: var(--accent-mauve);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--bg-lavender);
+      border-top: 1px solid var(--border);
+      padding: 60px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-brand {
+      max-width: 360px;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-top: 18px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 80px;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .footer-col-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--text-primary);
+    }
+
+    .footer-col a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+      display: inline-block;
+    }
+
+    .footer-col a:hover {
+      color: var(--accent-mauve);
+      transform: translateX(4px);
+    }
+
+    /* Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s var(--transition), transform 0.8s var(--transition);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* Cursor glow - light theme version */
+    .cursor-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 99;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .cursor-glow.visible {
+      opacity: 1;
+    }
+
+    .cursor-glow-halo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 132, 156, 0.14) 0%, rgba(197, 155, 216, 0.10) 40%, transparent 70%);
+      transform: translate(-50%, -50%);
+      filter: blur(20px);
+    }
+
+    /* Scroll progress */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-mauve), var(--accent-lavender), var(--accent-peach));
+      z-index: 101;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* Magnetic button effect container */
+    .magnetic {
+      transition: transform 0.3s var(--transition);
+    }
+
+    /* Number counter */
+    .counter {
+      font-family: "Inter", sans-serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+
+    .counter-label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+
+    .metrics {
+      display: flex;
+      gap: 64px;
+      justify-content: center;
+      margin-top: 48px;
+    }
+
+    .metric {
+      text-align: center;
+    }
+
+    @media (max-width: 1200px) {
+      .challenge-grid,
+      .module-grid,
+      .demo-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .role-grid,
+      .retro-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 56px;
+      }
+      .hero-subtitle {
+        font-size: 44px;
+      }
+      .craft-name {
+        font-size: 20px;
+      }
+      .nav {
+        display: none;
+      }
+      .metrics {
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container,
+      .header-inner {
+        padding: 0 24px;
+      }
+      .header {
+        height: 64px;
+      }
+      .hero {
+        padding-top: 140px;
+        padding-bottom: 80px;
+        min-height: auto;
+      }
+      .challenge-grid,
+      .module-grid,
+      .feature-grid,
+      .demo-steps {
+        grid-template-columns: 1fr;
+      }
+      .flow-bar {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .craft-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .craft-desc {
+        max-width: 100%;
+      }
+      .hero-title {
+        font-size: 36px;
+      }
+      .hero-subtitle {
+        font-size: 28px;
+      }
+      .section-title {
+        font-size: 32px;
+      }
+      .hero-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .hero-actions .btn {
+        width: 100%;
+      }
+      .footer-inner {
+        flex-direction: column;
+        gap: 40px;
+      }
+      .footer-links {
+        gap: 40px;
+      }
+      .data-table th,
+      .data-table td {
+        padding: 16px;
+        font-size: 13px;
+      }
+      .hero-visual-sidebar {
+        display: none;
+      }
+      .metrics {
+        flex-direction: column;
+        gap: 24px;
+      }
+      .architecture-showcase .screenshot,
+      .demo-showcase .screenshot {
+        height: 260px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      html {
+        scroll-behavior: auto;
+      }
+      .hero-shape, .flow-arrow {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="cursor-glow" id="cursorGlow">
+    <div class="cursor-glow-halo" id="cursorGlowHalo"></div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#hero" class="logo">
+        <span class="logo-mark">EK</span>
+        <span class="logo-text">STUDIO</span>
+      </a>
+      <nav class="nav">
+        <a href="#context">项目背景</a>
+        <a href="#role">我的角色</a>
+        <a href="#architecture">产品架构</a>
+        <a href="#tech-stack">技术架构</a>
+        <a href="#capabilities">能力映射</a>
+        <a href="#value">价值对比</a>
+        <a href="#features">核心功能</a>
+        <a href="#craft">设计亮点</a>
+        <a href="#demo">演示流程</a>
+      </nav>
+      <a href="https://github.com/Eklaraby/ek-studio" target="_blank" class="btn btn-primary magnetic">查看仓库</a>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
+    <section class="hero" id="hero">
+      <div class="hero-bg-shapes">
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="hero-shape hero-shape-3"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <span class="kicker reveal">PORTFOLIO 01</span>
+          <h1 class="hero-title reveal reveal-delay-1">EK STUDIO 电商 AI 工作台</h1>
+          <h2 class="hero-subtitle gradient-text reveal reveal-delay-1">从参考图到电商场景图</h2>
+          <p class="hero-desc reveal reveal-delay-2">
+            本地优先的 AI 商品视觉创作应用。把灵感梳理、AI 生成、多轮迭代和历程归档整合成一个可继续推进的工作流。
+          </p>
+          <div class="hero-actions reveal reveal-delay-2">
+            <a href="#context" class="btn btn-primary magnetic">查看项目详情</a>
+            <a href="https://github.com/Eklaraby/ek-studio" target="_blank" class="btn btn-secondary magnetic">GitHub</a>
+          </div>
+          <div class="hero-meta reveal reveal-delay-3">
+            <span>Next.js + React + TypeScript</span>
+            <span>阿里云百炼图像模型</span>
+            <span>本地 SQLite 持久化</span>
+          </div>
+          <div class="hero-visual reveal reveal-delay-3">
+            <img src="images/workspace.jpg" alt="EK STUDIO 工作台首页" style="width: 100%; height: auto; display: block; border-radius: var(--radius-lg);">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="context" id="context">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="kicker">01 / CONTEXT</span>
+          <h2 class="section-title">为什么做 EK STUDIO</h2>
+          <p class="section-desc">
+            面向中小电商卖家的 AI 商品视觉创作工具，把零散的需求沟通、图片生成和版本管理收进一个可继续推进的工作流。
+          </p>
+        </div>
+        <div class="challenge-grid">
+          <div class="card reveal">
+            <div class="card-index" style="color: var(--accent-violet);">01</div>
+            <h3 class="card-title">参考图到场景图断层</h3>
+            <p class="card-desc">卖家有商品实拍图，却不知道怎么描述想要的场景。传统做法是反复外包沟通，周期长、成本高。</p>
+          </div>
+          <div class="card reveal reveal-delay-1">
+            <div class="card-index" style="color: var(--accent-pink);">02</div>
+            <h3 class="card-title">多轮反馈没有统一入口</h3>
+            <p class="card-desc">用通用对话工具生成图片时，修改意见散落在聊天记录里，无法回溯每一版的改动原因。</p>
+          </div>
+          <div class="card reveal reveal-delay-2">
+            <div class="card-index" style="color: var(--accent-coral);">03</div>
+            <h3 class="card-title">生成结果难以沉淀复用</h3>
+            <p class="card-desc">没有统一的生成历史，卖家无法回看、对比、下载历史版本，每次都要从头开始。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="role" id="role">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="kicker">02 / MY ROLE</span>
+          <h2 class="section-title">我的角色</h2>
+          <p class="section-desc">
+            从需求洞察到可运行 Demo，独立负责 EK STUDIO 的产品方案、界面交互与本地落地。
+          </p>
+        </div>
+        <div class="role-grid">
+          <div class="card role-card reveal">
+            <h3>独立开发者 / 产品方案负责人</h3>
+            <p>
+              这个项目从 0 到 1 由我一个人推进：先通过小红书、淘宝卖家访谈和自身电商观察定位痛点，再把它翻译成可演示的产品方案，最后用 Next.js + AI 图像模型做出本地可运行的 Demo。
+            </p>
+            <p>
+              过程中反复在"卖家能听懂"和"技术可实现"之间找平衡，目标是让打开网页的人都能理解：这个工具解决什么问题、为什么值得做、我做了什么。
+            </p>
+            <div class="role-meta">
+              <span class="tag">2026.07 - 2026.08</span>
+              <span class="tag">个人项目</span>
+              <span class="tag">产品作品集</span>
+            </div>
+          </div>
+          <div class="role-list">
+            <div class="role-item reveal reveal-delay-1">
+              <div class="role-item-icon">01</div>
+              <div class="role-item-text"><strong>需求分析：</strong>梳理中小电商卖家从参考图到场景图的真实痛点</div>
+            </div>
+            <div class="role-item reveal reveal-delay-1">
+              <div class="role-item-icon">02</div>
+              <div class="role-item-text"><strong>方案设计：</strong>定义 DISCOVERY → GENERATION → ITERATION → ARCHIVE 工作流</div>
+            </div>
+            <div class="role-item reveal reveal-delay-2">
+              <div class="role-item-icon">03</div>
+              <div class="role-item-text"><strong>界面与交互：</strong>延续 EK STUDIO 高级暗色工作室官网质感，用玻璃态面板、紫粉橙渐变与光标光晕构建视觉系统，实现平滑滚动与动态反馈</div>
+            </div>
+            <div class="role-item reveal reveal-delay-2">
+              <div class="role-item-icon">04</div>
+              <div class="role-item-text"><strong>Prompt 工程：</strong>把自然语言需求转化为模型可执行的图像生成指令</div>
+            </div>
+            <div class="role-item reveal reveal-delay-3">
+              <div class="role-item-icon">05</div>
+              <div class="role-item-text"><strong>本地部署：</strong>SQLite 持久化 + JWT 会话，让 Demo 可离线演示</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="architecture" id="architecture">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="kicker">03 / ARCHITECTURE</span>
+          <h2 class="section-title">把创作流程拆成可继续推进的模块</h2>
+          <p class="section-desc">
+            顾问负责把想法说清楚，生成模块负责把画面做出来，历程看板负责让每一次尝试都可以被回看和继续。
+          </p>
+        </div>
+        <div class="architecture-showcase reveal">
+          <img src="ek-architecture-diagram.png" alt="EK STUDIO 产品架构与模块关系图" style="width: 100%; height: auto; display: block;">
+        </div>
+        <div class="flow-bar reveal">
+          <span class="flow-step" style="color: var(--accent-violet);">DISCOVERY</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step" style="color: var(--accent-pink);">GENERATION</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step" style="color: var(--accent-coral);">ITERATION</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step" style="color: var(--accent-cyan);">ARCHIVE</span>
+        </div>
+        <div class="module-grid">
+          <div class="card module-card reveal">
+            <div class="card-index" style="color: var(--accent-violet);">01</div>
+            <h3 class="card-title">AI 电商顾问</h3>
+            <p class="card-desc">把模糊的出图想法梳理成结构化需求简报，不教用户卖货，只帮用户说清楚想要什么。</p>
+          </div>
+          <div class="card module-card reveal reveal-delay-1">
+            <div class="card-index" style="color: var(--accent-pink);">02</div>
+            <h3 class="card-title">商品生成图</h3>
+            <p class="card-desc">文字需求 + 1-4 张商品参考图，生成保持主体颜色与结构的电商场景图。</p>
+          </div>
+          <div class="card module-card reveal reveal-delay-2">
+            <div class="card-index" style="color: var(--accent-coral);">03</div>
+            <h3 class="card-title">自由 AI 创图</h3>
+            <p class="card-desc">纯文字创意生成，用于探索视觉方向，不依赖参考图也能快速产出概念。</p>
+          </div>
+          <div class="card module-card reveal">
+            <div class="card-index" style="color: var(--accent-mint);">04</div>
+            <h3 class="card-title">历程看板</h3>
+            <p class="card-desc">每次生成自动归档，支持模块筛选、搜索、批量下载和单轮删除清理。</p>
+          </div>
+          <div class="card module-card reveal reveal-delay-1">
+            <div class="card-index" style="color: var(--accent-gold);">05</div>
+            <h3 class="card-title">登录 / 个人空间</h3>
+            <p class="card-desc">本地演示账号 + JWT Cookie 会话，未来可扩展为跨设备的个人创作空间。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tech-stack" id="tech-stack">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="kicker">04 / TECH STACK</span>
+          <h2 class="section-title">技术架构</h2>
+          <p class="section-desc">
+            用现代前端技术栈做界面，用 SQLite 做本地持久化，用 Provider 模式隔离不同 AI 模型接口。
+          </p>
+        </div>
+        <table class="data-table reveal">
+          <thead>
+            <tr>
+              <th>层级</th>
+              <th>技术选型</th>
+              <th>选型理由</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>前端框架</strong></td>
+              <td>Next.js 14 + React + TypeScript</td>
+              <td>类型安全、服务端路由、适合快速迭代个人项目</td>
+            </tr>
+            <tr>
+              <td><strong>样式方案</strong></td>
+              <td>Tailwind CSS + shadcn/ui</td>
+              <td>原子化样式保证一致性，组件库加速交互开发</td>
+            </tr>
+            <tr>
+              <td><strong>后端接口</strong></td>
+              <td>Next.js Route Handlers</td>
+              <td>无需额外后端服务，降低部署与演示成本</td>
+            </tr>
+            <tr>
+              <td><strong>数据持久化</strong></td>
+              <td>SQLite + better-sqlite3</td>
+              <td>本地文件型数据库，Demo 可离线运行，便于归档历程</td>
+            </tr>
+            <tr>
+              <td><strong>会话认证</strong></td>
+              <td>JWT Cookie</td>
+              <td>本地演示账号即可体验登录态，未来可扩展多用户</td>
+            </tr>
+            <tr>
+              <td><strong>图像模型</strong></td>
+              <td>DashScope（阿里云百炼）+ Provider 适配层</td>
+              <td>抽象模型调用层，方便切换不同图像生成服务</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="capabilities" id="capabilities">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="kicker">05 / CAPABILITIES</span>
+          <h2 class="section-title">能力映射</h2>
+          <p class="section-desc">
+            这个项目不仅是一个 Demo，也是我对产品方案与落地能力的实践和展示。
+          </p>
+        </div>
+        <table class="data-table reveal">
+          <thead>
+            <tr>
+              <th>能力维度</th>
+              <th>在 EK STUDIO 中的体现</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>业务洞察</strong></td>
+              <td>通过卖家访谈和平台观察，定位"参考图到场景图断层、反馈散落、结果难沉淀"三个真实痛点</td>
+            </tr>
+            <tr>
+              <td><strong>方案设计</strong></td>
+              <td>把零散需求抽象成 DISCOVERY → GENERATION → ITERATION → ARCHIVE 双路径工作流</td>
+            </tr>
+            <tr>
+              <td><strong>产品演示</strong></td>
+              <td>提供本地可运行的完整 Demo，支持登录、生成、迭代、归档全链路演示</td>
+            </tr>
+            <tr>
+              <td><strong>技术理解</strong></td>
+              <td>独立完成 Next.js / SQLite / JWT / Provider 抽象层的技术选型与落地</td>
+            </tr>
+            <tr>
+              <td><strong>价值表达</strong></td>
+              <td>用分钟级生成、降低沟通门槛、版本可追溯等语言，把技术能力转译为业务价值</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="value-compare" id="value">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="kicker">06 / VALUE</span>
+          <h2 class="section-title">价值对比</h2>
+          <p class="section-desc">
+            对比传统外包作图流程，EK STUDIO 把创作闭环从"天"缩短到"分钟"。
+          </p>
+        </div>
+        <table class="data-table reveal">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>传统外包流程</th>
+              <th>EK STUDIO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>时间</strong></td>
+              <td>沟通 + 排期 + 修改，通常 1-3 天</td>
+              <td>上传参考图、输入需求，数分钟内获得多版方案</td>
+            </tr>
+            <tr>
+              <td><strong>成本</strong></td>
+              <td>按张计费，反复修改可能产生额外费用</td>
+              <td>本地 Demo 阶段按模型调用量计费，规模化后边际成本更低</td>
+            </tr>
+            <tr>
+              <td><strong>沟通</strong></td>
+              <td>需求通过微信/邮件来回传递，容易失真</td>
+              <td>AI 顾问先把需求结构化，生成目标更清晰</td>
+            </tr>
+            <tr>
+              <td><strong>可控性</strong></td>
+              <td>修改周期依赖设计师时间，历史版本难找回</td>
+              <td>同图多轮迭代，每版自动归档，随时可回溯</td>
+            </tr>
+            <tr>
+              <td><strong>沉淀</strong></td>
+              <td>成图分散在不同聊天记录或网盘</td>
+              <td>统一历程看板，支持筛选、搜索、批量下载</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="kicker">07 / FEATURES</span>
+          <h2 class="section-title">每个模块解决一个真实问题</h2>
+          <p class="section-desc">不堆功能，只保留对卖家创作链路真正有用的能力。以下每个卡片都预留了截图位置。</p>
+        </div>
+        <div class="feature-grid">
+          <div class="card feature-card reveal">
+            <div class="feature-thumb product">
+              <img src="images/product.jpg" alt="商品生成图" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            </div>
+            <div class="feature-info">
+              <h3 class="card-title">商品生成图</h3>
+              <p class="card-desc">主体保护 + 场景融合，上传参考图后生成可商用的电商场景图。</p>
+            </div>
+          </div>
+          <div class="card feature-card reveal reveal-delay-1">
+            <div class="feature-thumb creative">
+              <img src="images/create.png" alt="自由 AI 创图" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            </div>
+            <div class="feature-info">
+              <h3 class="card-title">自由 AI 创图</h3>
+              <p class="card-desc">纯文字驱动创意生成，适合在确定商品前快速探索视觉风格。</p>
+            </div>
+          </div>
+          <div class="card feature-card reveal reveal-delay-2">
+            <div class="feature-thumb advisor">
+              <img src="images/advisor.png" alt="AI 电商顾问" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            </div>
+            <div class="feature-info">
+              <h3 class="card-title">AI 电商顾问</h3>
+              <p class="card-desc">多轮对话整理成结构化需求简报，让后续生成有明确方向。</p>
+            </div>
+          </div>
+          <div class="card feature-card reveal reveal-delay-3">
+            <div class="feature-thumb archive">
+              <img src="images/history.jpg" alt="历程看板" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            </div>
+            <div class="feature-info">
+              <h3 class="card-title">历程看板</h3>
+              <p class="card-desc">生成结果自动归档，支持按模块筛选、搜索和批量下载。</p>
+            </div>
+          </div>
+        </div>
+        <div class="metrics reveal">
+          <div class="metric">
+            <div class="counter" data-target="4">0</div>
+            <div class="counter-label">核心模块</div>
+          </div>
+          <div class="metric">
+            <div class="counter" data-target="2">0</div>
+            <div class="counter-label">生成路径</div>
+          </div>
+          <div class="metric">
+            <div class="counter" data-target="1">0</div>
+            <div class="counter-label">本地数据库</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="craft" id="craft">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="kicker">08 / CRAFT</span>
+          <h2 class="section-title">藏在细节里的体验</h2>
+          <p class="section-desc">工作台不是功能的堆砌，而是让每个环节都能继续推进的体验设计。</p>
+        </div>
+        <div class="craft-list">
+          <div class="craft-item reveal">
+            <div class="craft-left">
+              <span class="craft-number" style="color: var(--accent-violet);">01</span>
+              <h3 class="craft-name">同图多轮迭代反馈</h3>
+            </div>
+            <p class="craft-desc">基于同一张图持续文字反馈，所有版本归档在同一条记录，直到点击「这一轮结束」。</p>
+          </div>
+          <div class="craft-item reveal">
+            <div class="craft-left">
+              <span class="craft-number" style="color: var(--accent-pink);">02</span>
+              <h3 class="craft-name">切换模块不中断生成</h3>
+            </div>
+            <p class="craft-desc">生成任务由全局状态接管，切换功能模块后回到原页面仍可查看最新进度。</p>
+          </div>
+          <div class="craft-item reveal">
+            <div class="craft-left">
+              <span class="craft-number" style="color: var(--accent-coral);">03</span>
+              <h3 class="craft-name">全局光标光晕</h3>
+            </div>
+            <p class="craft-desc">鼠标移动时跟随的柔和渐变光晕，为明亮界面增加一层微妙的沉浸感。</p>
+          </div>
+          <div class="craft-item reveal">
+            <div class="craft-left">
+              <span class="craft-number" style="color: var(--accent-cyan);">04</span>
+              <h3 class="craft-name">本地 SQLite 持久化</h3>
+            </div>
+            <p class="craft-desc">历程、版本和顾问会话全部落盘本地 SQLite，刷新页面后仍可恢复未结束的生成轮次。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-flow" id="demo">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="kicker">09 / DEMO</span>
+          <h2 class="section-title">演示流程</h2>
+          <p class="section-desc">
+            四步即可在现场完整演示从需求到归档的创作闭环。
+          </p>
+        </div>
+        <div class="demo-showcase reveal">
+          <video src="videos/demo.mp4" controls autoplay muted loop playsinline style="width: 100%; height: auto; display: block; border-radius: var(--radius-lg);">
+            您的浏览器不支持视频播放。
+          </video>
+        </div>
+        <div class="demo-steps">
+          <div class="demo-step reveal">
+            <div class="demo-step-number">STEP 01</div>
+            <h3 class="demo-step-title">登录本地 Demo</h3>
+            <p class="demo-step-desc">使用本地演示账号登录，JWT Cookie 保持会话状态。</p>
+          </div>
+          <div class="demo-step reveal reveal-delay-1">
+            <div class="demo-step-number">STEP 02</div>
+            <h3 class="demo-step-title">上传商品参考图</h3>
+            <p class="demo-step-desc">选择 1-4 张商品实拍图，输入场景描述或让 AI 顾问辅助梳理。</p>
+          </div>
+          <div class="demo-step reveal reveal-delay-2">
+            <div class="demo-step-number">STEP 03</div>
+            <h3 class="demo-step-title">生成与迭代</h3>
+            <p class="demo-step-desc">获取多版场景图，基于同一张图继续文字反馈，直到满意。</p>
+          </div>
+          <div class="demo-step reveal reveal-delay-3">
+            <div class="demo-step-number">STEP 04</div>
+            <h3 class="demo-step-title">归档与下载</h3>
+            <p class="demo-step-desc">历程看板自动记录生成历史，支持筛选、搜索和批量下载。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <a href="#hero" class="logo">
+              <span class="logo-mark">EK</span>
+              <span class="logo-text">STUDIO</span>
+            </a>
+            <p class="footer-tagline">为商品创作更准确、更有想象力的视觉表达。</p>
+            <p class="footer-copy">© 2026 EK STUDIO. All rights reserved.</p>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <span class="footer-col-title">项目</span>
+              <a href="https://github.com/Eklaraby/ek-studio" target="_blank">查看仓库</a>
+              <a href="https://github.com/Eklaraby" target="_blank">GitHub 主页</a>
+            </div>
+            <div class="footer-col">
+              <span class="footer-col-title">联系</span>
+              <a href="https://github.com/Eklaraby" target="_blank">GitHub: Eklaraby</a>
+              <a href="#">xiaohongshu: 跟着风走不跟导航</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll progress
+    const scrollProgress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      scrollProgress.style.width = progress + '%';
+    });
+
+    // Active nav link
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 120) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Reveal on scroll
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Cursor glow (desktop only)
+    const cursorGlow = document.getElementById('cursorGlow');
+    const cursorGlowHalo = document.getElementById('cursorGlowHalo');
+
+    if (window.matchMedia('(pointer: fine)').matches) {
+      cursorGlow.classList.add('visible');
+      document.addEventListener('mousemove', (e) => {
+        cursorGlowHalo.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+      });
+    }
+
+    // Smooth scroll for nav links (polyfill for Safari)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Magnetic button effect
+    const magneticElements = document.querySelectorAll('.magnetic');
+    if (window.matchMedia('(pointer: fine)').matches) {
+      magneticElements.forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+          const rect = el.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          el.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+        });
+        el.addEventListener('mouseleave', () => {
+          el.style.transform = 'translate(0, 0)';
+        });
+      });
+    }
+
+    // Counter animation
+    const counters = document.querySelectorAll('.counter');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = parseInt(entry.target.getAttribute('data-target'));
+          const duration = 1500;
+          const startTime = performance.now();
+          const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            entry.target.textContent = Math.floor(target * easeOut);
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+          requestAnimationFrame(animate);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => counterObserver.observe(counter));
+
+    // 3D tilt effect for cards
+    const tiltCards = document.querySelectorAll('.feature-card, .demo-step, .module-card');
+    if (window.matchMedia('(pointer: fine)').matches) {
+      tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = (y - centerY) / centerY * -3;
+          const rotateY = (x - centerX) / centerX * 3;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+    }
+  </script>
+</body>
+</html>
